@@ -1,0 +1,20 @@
+
+global:
+  scrape_interval: 15s 
+
+scrape_configs:
+  
+  - job_name: "prometheus"
+    
+    scrape_interval: 5s # Esse valor irá sobreescrever o valor padrão global para esse alvo
+  
+    metrics_path: /metrics # Endpoint padrão para a raspagem das métricas
+
+    static_configs:
+      - targets: 
+        - localhost:9090
+  
+  - job_name: "Ubuntu"
+    static_configs:
+      - targets: 
+        - 172.20.15.55:9100

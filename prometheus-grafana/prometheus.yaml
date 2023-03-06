@@ -1,0 +1,34 @@
+# /etc/prometheus/prometheus.yml
+
+# Configurações Globais
+global:
+  scrape_interval: 30s # Set o scrape interval para cada 15 secondos. Default é cada 1 minuto.
+  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Configurações especificas
+
+# Configuração do Alertmanager
+#alerting:
+#  alertmanagers:
+#    - static_configs:
+#        - targets:
+#          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+#rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # O job name é adicionado como label `job=<job_name>` para qualquer timeseries scraped dessa config.
+  - job_name: "prometheus"
+
+    # metrics_path defaults para '/metrics'
+    # scheme defaults para 'http'.
+
+    static_configs:
+      - targets: ["localhost:9090"] # Auto-monitoramento do prometheus
