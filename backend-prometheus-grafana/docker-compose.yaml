@@ -7,11 +7,10 @@
 version: '3'
 
 volumes:
-  # volume para adicionar um datasource de forma automatizada
-  # assim que o serviço do Grafana subir. 
+  # volume para adicionar um datasource de forma automatizada assim que o serviço do Grafana subir. 
   # Usa o ds-prometheus.yaml dentro do diretório grafana_provisioning/Utiliza
   grafana_data:
-  #
+  # volume do prometheus
   prometheus_data: 
 
 # Criação da rede para o stack de monitoramento
