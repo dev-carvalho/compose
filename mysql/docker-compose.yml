@@ -1,0 +1,58 @@
+# Author: Marcos Antônio de Carvalho
+# Descrição: Subir o stack de banco de dados (MySQL e PhpMyAdmin) com IP Fixo
+
+version: '3.3'
+
+# volumes:
+#    db_data:
+
+services:
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    hostname: mysql
+#   volumes:
+#     - db_data:/var/lib/mysql
+    volumes:
+      - type: bind
+        source: /root/vols/wordpress
+        target: /var/lib/mysql       
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: password
+     #MYSQL_DATABASE: app_development
+    networks:
+      net-db-mysql:
+        ipv4_address: 192.168.12.2      
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    hostname: phpmyadmin
+    depends_on:
+       - mysql
+    restart: always
+    ports:
+      - "40001:80"
+    environment:
+       PMA_HOST: mysql
+       PMA_PORT: 3306 
+       PMA_ARBITRARY: 1
+    networks:
+      net-db-mysql:
+        ipv4_address: 192.168.12.3 
+
+networks:
+  net-db-mysql:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.12.0/24"
+          gateway: 192.168.12.1        
+
+
+ 
+
