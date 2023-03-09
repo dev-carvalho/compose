@@ -1,6 +1,0 @@
-# Arquivo: grafana/provisioning/ds-prometheus.yaml
-datasources:
-- name: Prometheus
-  access: proxy
-  type: prometheus
-  url: http://prometheus:9090
